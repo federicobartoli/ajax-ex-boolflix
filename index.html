@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Boolflix</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+       <div class="container-fluid mc-black-fluid">
+            <header>
+                     <div class="row">
+                          <div class="container-fluid mc-black">
+                               <div class="row mc-header">
+                                    <div class="col-6 mc-sx-header">
+                                         <div class="logodiv">
+                                              <img src="LOGO" alt="LOGO">
+                                         </div>
+                                    </div>
+                                    <div class="col-6 mc-dx-header">
+                                        <input class="cerca-un-film" name="" placeholder="cerca un film">
+                                        <button class="vai-al-film" name="button">Vai al film</button>
+                                    </div>
+                               </div>
+                          </div>
+                     </div>
+                </header>
+                <div class="row">
+                     <div class="container-fluid mc-sfondo">
+                          <div class="col-12 mc-films">
+
+                          <div class="mc-title text-center text-white "><h1>Films</h1></div>
+                          <div class="mc-films-cont"></div>
+
+
+
+
+                          </div>
+                     </div>
+                </div>
+           </div>
+     </div>
+
+     <script id="template-film-id" type="text/x-handlebars-template">
+                    <div class="mc-films-item" data-genere="{{genereAlbum}}">
+                         <div class="mc-info">
+                              <p>Titolo: {{titolo}}</p>
+                              <p>Titolo originale: {{titoloOriginale}}</p>
+                              <p>Lingua :{{lingua}}</p>
+                              <p>Percentuale voto: {{voto}}</p>
+                         </div>
+                         <div class="mc-img-films">
+                              <img src="{{immagineAlbum}}" alt="">
+                         </div>
+
+                    </div>
+          </script>
+
+    <script src="js/main.js" charset="utf-8"></script>
+  </body>
+</html>
