@@ -10,6 +10,9 @@
      margin-right: 120px;
 }
 
+.star-active{
+     color: yellow;
+}
 
 
 .mc-info p:last-child:after{
@@ -30,7 +33,9 @@
      display: flex;
      align-items: center;
      overflow-y: auto;
+     color: white;
 }
+
 
 .mc-img-film{
      position: relative;

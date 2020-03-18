@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-
+     var oggettoVoto = [];
      var apiBaseUrl = 'https://api.themoviedb.org/3'; //URL per api
      var source = $('#template-film-id').html();
      var templateFilm = Handlebars.compile(source);
@@ -21,7 +21,13 @@ $(document).ready(function () {
                success: function (data) { // se la chiamata ajax va a buon fine...
                     console.log(data);
 
-                    var films = data.results; // una variabile con un array che contiene tutti i film trovati..
+                    var films = data.results; // creo una variabile con un array che contiene tutti i film trovati..
+                    if(data.total_results < 1 ){
+                    $('.mc-films-cont').text('Non ho trovato nessun film,spiacente.');
+                    console.log('non ho trovato niente');
+               }else{
+
+
                     for (var i = 0; i < films.length; i++) { // con il ciclo for entro nell'array contenente tutti i film ...
                          var film = films[i] // mi creo ad ogni giro del ciclo una variabile con un film corrispondente alla ricerca
                          console.log(film.title); // debug
@@ -30,14 +36,32 @@ $(document).ready(function () {
                               titolo: film.title,
                               titoloOriginale: film.original_title,
                               lingua :film.original_language,
-                              voto: trasformo(film.vote_average) //trasformo il voto da 1 a 5 anzichè da 1 a 10 grazie alla mia funzione trasformo
+                              voto: trasformo(film.vote_average)  //trasformo il voto da 1 a 5 anzichè da 1 a 10 grazie alla mia funzione trasformo
+
                          };
+                         var votoEffettivo = parseInt(informazioni.voto);
+                         console.log(votoEffettivo);
+                         console.log(votoEffettivo.length);
+                         oggettoVoto.push(votoEffettivo);
                          var html = templateFilm(informazioni);
 
-                         $('.mc-films-cont').append(html); //scrivo
+                         $('.mc-films-cont').append(html);
+                          //scrivo
+
 
 
                     }
+
+
+                    // console.log(oggettoVoto);
+                    // for (var i = 0; i < oggettoVoto.length; i++) {
+                    //      for (var variable in oggettoVoto[i]) {
+                    //           $('.fa-star').addClass('.star-active');
+                    //      }
+                    //
+                    // };
+
+               }
 
                },
                error: function (err) {
