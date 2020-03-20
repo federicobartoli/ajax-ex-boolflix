@@ -5,6 +5,8 @@
      font-family: sans-serif;
 }
 
+
+
 .mc-barra-search{
      position: relative;
 }
@@ -59,6 +61,29 @@
      width: 30%;
 }
 
+.img-wallpaper{
+     position: relative;
+}
+
+
+.img-wallpaper img{
+     width: 100%;
+     height: 60%;
+     opacity: 0.5;
+}
+
+.mc-produzione{
+     width: 200px;
+     position: absolute;
+     top : 200px;
+     left: 50px;
+
+}
+
+.mc-produzione img {
+     opacity: 1;
+}
+
 
 .mc-barra-di-ricerca{
      height: 100%;
@@ -105,8 +130,9 @@
 .mc-title{
      display: flex;
      align-items: center;
-     justify-content: center;
+     justify-content: flex-start;
      color: white;
+     padding-left: 50px;
 }
 
 .mc-films-cont {
@@ -187,7 +213,6 @@ textarea:focus, input:focus{
 
 
 
-
 .mc-img-film{
      position: relative;
 }
@@ -208,15 +233,8 @@ textarea:focus, input:focus{
 
 
 .mc-title h1{
-
-     font-size: 4rem;
+     font-size: 2rem;
 }
-
-
-
-
-
-
 
 
 .mc-dx-header{

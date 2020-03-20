@@ -42,10 +42,13 @@ $(document).ready(function () {
      };
 
      function cerca() {
+          $('.img-wallpaper').hide();
 
           $('.mc-films-cont').empty(); // vado a svuotare il div in caso ci fossero dei risultati di ricerca vecchi
           var ricercaDelFilm = $('.cerca-un-film').val(); // mi creo una variabile dove acquisisco i dati inseriti dall'utente tramite l'input
-
+          if(ricercaDelFilm == '' ){
+               $('.img-wallpaper').show();
+          }
           console.log(ricercaDelFilm); // debug
           $.ajax({ // faccio una chiamata ajax
                url: apiBaseUrl + '/search/movie',
