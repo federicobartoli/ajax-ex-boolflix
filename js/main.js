@@ -5,6 +5,18 @@ $(document).ready(function () {
      var apiBaseUrl = 'https://api.themoviedb.org/3'; //URL per api
      var source = $('#template-film-id').html();
      var templateFilm = Handlebars.compile(source);
+     $('.fa-search').click(function () {
+          if($(this).hasClass('mc-absolute')){
+               $(this).removeClass('mc-absolute');
+               $('.cerca-un-film').hide();
+          }else {
+               $(this).addClass('mc-absolute');
+               $('.cerca-un-film').show();
+          }
+
+
+     })
+     $('.cerca-un-film').keyup(cerca)
 
      $('.vai-al-film').click(cerca); //con un click nel bottone accanto alla barra di ricerca faccio partire la funzione cerca
      $('.cerca-un-film').keypress(function (event) { //avvio con il pulsante enter la funzione cerca.
@@ -45,10 +57,8 @@ $(document).ready(function () {
                          ricerca(films);
                     }
 
-               },
-               error: function (err) {
-                    alert('grande giove!');
                }
+
           })
           console.log(ricercaDelFilm); // debug
           $.ajax({ // faccio una chiamata ajax
@@ -68,12 +78,10 @@ $(document).ready(function () {
                          ricerca2(series);
                     }
 
-               },
-               error: function (err) {
-                    alert('grande giove!');
                }
+
           })
-          var ricercaDelFilm = $('.cerca-un-film').val('');
+
      };
 
 
