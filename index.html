@@ -11,40 +11,32 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-       <div class="mc-black-fluid">
-            <header>
-                     <div class="row">
-                          <div class="container-fluid mc-black">
-                               <div class="row mc-header">
-                                    <div class="col-6 mc-sx-header">
-                                         <div class="logodiv">
-                                              <img src="LOGO" alt="LOGO">
-                                         </div>
-                                    </div>
-                                    <div class="col-6 mc-dx-header">
-                                        <input class="cerca-un-film" name="" placeholder="cerca un film">
-                                        <button class="vai-al-film" name="button">Vai al film</button>
-                                    </div>
-                               </div>
-                          </div>
-                     </div>
-                </header>
-                <div class="row">
-                     <div class="container-fluid mc-sfondo">
-                          <div class="col-12 mc-films">
+          <div class="mc-black-fluid">
+               <header>
+                    <div class="mc-black">
+                              <div class="mc-logodiv">
+                                   <img src="LOGO" alt="LOGO">
+                              </div>
+                              <div class="mc-barra-di-ricerca">
+                                   <input class="cerca-un-film" name="" placeholder="cerca un film">
+                                   <button class="vai-al-film" name="button">Vai al film</button>
+                              </div>
+                    </div>
+               </header>
+               <main>
+                    <div class="mc-sfondo">
+                         <div class="mc-films">
+                              <div class="mc-title">
+                                   <h1>Films</h1>
+                              </div>
+                         </div>
+                         <div class="mc-films-cont">
 
-                          <div class="mc-title"><h1>Films</h1></div>
-                          <div class="mc-films-cont">
-                          </div>
+                         </div>
+                    </div>
+               </main>
+          </div>
 
-
-
-
-                          </div>
-                     </div>
-                </div>
-           </div>
-     </div>
 
      <script id="template-film-id" type="text/x-handlebars-template">
                     <div class="mc-films-item" data-genere="{{genereAlbum}}">
