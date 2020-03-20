@@ -22,8 +22,10 @@ $(document).ready(function () {
      };
 
      function cerca() {
+
           $('.mc-films-cont').empty(); // vado a svuotare il div in caso ci fossero dei risultati di ricerca vecchi
           var ricercaDelFilm = $('.cerca-un-film').val(); // mi creo una variabile dove acquisisco i dati inseriti dall'utente tramite l'input
+
           console.log(ricercaDelFilm); // debug
           $.ajax({ // faccio una chiamata ajax
                url: apiBaseUrl + '/search/movie',
@@ -71,6 +73,7 @@ $(document).ready(function () {
                     alert('grande giove!');
                }
           })
+          var ricercaDelFilm = $('.cerca-un-film').val('');
      };
 
 
