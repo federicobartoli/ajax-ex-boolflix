@@ -117,6 +117,7 @@ $(document).ready(function () {
                     titolo: film.title,
                     titoloOriginale: film.original_title,
                     lingua :flag(film.original_language),
+                    copertina: film.poster_path,
                     voto: stars(film.vote_average)  //per la votazione uso la funzione stars .
                };
 
@@ -133,6 +134,7 @@ $(document).ready(function () {
                     titolo: serie.name,
                     titoloOriginale: serie.original_name,
                     lingua :flag(serie.original_language),
+                    copertina: film.poster_path,
                     voto: stars(serie.vote_average)  //per la votazione uso la funzione stars .
                };
 

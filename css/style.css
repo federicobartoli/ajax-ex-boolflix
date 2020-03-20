@@ -105,12 +105,12 @@
      position: relative;
 }
 
-.mc-img-film img {
-     width: 400px;
-     height: 400px;
+.mc-img-films img {
+     width: 100px;
+     
 }
 
-.mc-img-film{
+.mc-img-films{
      transition: all 0.5s;
      padding-right: 50px;
 }
