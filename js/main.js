@@ -95,7 +95,7 @@ $(document).ready(function () {
           return votoStelle.join(''); // mi returno l'array più ho aggiunto il join per togliere le virgole che separavano gli array(in questo caso le stelline)
      };
 
-     function flag(linguaOriginale) {
+     function flag(linguaOriginale) { //funzione per le bandiere
           var bandiera = linguaOriginale;
           if(bandiera == 'en') {
                bandiera = 'us';
@@ -127,14 +127,14 @@ $(document).ready(function () {
      }
 
      function ricerca2(series) {
-          for (var i = 0; i < series.length; i++) { // con il ciclo for entro nell'array contenente tutti i film ...
-               var serie = series[i] // mi creo ad ogni giro del ciclo una variabile con un film corrispondente alla ricerca
+          for (var i = 0; i < series.length; i++) { // con il ciclo for entro nell'array contenente tutti le serie ...
+               var serie = series[i] // mi creo ad ogni giro del ciclo una variabile con una serie corrispondente alla ricerca
 
                var informazioniSeries = { // creo un oggetto contenente i parametri che andrò a cambiare con handlebars..
                     titolo: serie.name,
                     titoloOriginale: serie.original_name,
                     lingua :flag(serie.original_language),
-                    copertina: film.poster_path,
+                    copertina: serie.poster_path,
                     voto: stars(serie.vote_average)  //per la votazione uso la funzione stars .
                };
 

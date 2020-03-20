@@ -2,6 +2,7 @@
      margin: 0;
      padding: 0;
      box-sizing: border-box;
+     font-family: sans-serif;
 }
 
 .mc-black-fluid{
@@ -16,27 +17,48 @@
      height: 50px;
      display: flex;
      flex-direction: row;
+     padding-top: 25px;
+}
+
+.mc-nav {
+     padding-left: 20px;
+     padding-bottom: 0.1em;
+}
+
+.mc-nav a {
+     color:white;
+     text-decoration: none;
+     padding-right: 15px;
+     font-size: 0.7em;
 
 }
 
 .mc-logodiv {
      height: 100%;
-     width: 50%;
+     width: 70%;
      display: flex;
-     justify-content: center;
+     justify-content: flex-start;
      align-items: center;
+     padding-left: 35px;
 }
 
 
 .mc-barra-di-ricerca{
      height: 100%;
-     width: 50%;
+     width: 30%;
      display: flex;
      justify-content: center;
      align-items: center;
 }
 
+.mc-barra-di-ricerca .fa-search {
+     color: white;
+     padding-right: 15px;
+}
+
 .mc-logodiv img{
+     width: 100%;
+     width: 6rem;
 
 }
 
@@ -107,7 +129,7 @@
 
 .mc-img-films img {
      width: 100px;
-     
+
 }
 
 .mc-img-films{
