@@ -48,6 +48,29 @@ $(document).ready(function () {
                     alert('grande giove!');
                }
           })
+          console.log(ricercaDelFilm); // debug
+          $.ajax({ // faccio una chiamata ajax
+               url: apiBaseUrl + '/search/tv',
+               data: {
+                    api_key: '73ae8877a28c5944fa34ff1c5a2be181',
+                    query: ricercaDelFilm, //qui vado ad inserire il dato inserito dall'utente
+                    language: 'it-IT'
+               },
+               method: 'GET',
+               success: function (data) { // se la chiamata ajax va a buon fine...
+                    var series = data.results; // creo una variabile con un array che contiene tutti i film trovati..
+                    if(data.total_results < 1 ){
+                    $('.mc-films-cont').text('Non ho trovato nessun film,spiacente.');
+
+                    }else{
+                         ricerca2(series);
+                    }
+
+               },
+               error: function (err) {
+                    alert('grande giove!');
+               }
+          })
      };
 
 
@@ -74,6 +97,9 @@ $(document).ready(function () {
           if(bandiera == 'en') {
                bandiera = 'us';
           }
+          if(bandiera == 'ja') {
+               bandiera = 'jp';
+          }
           return bandiera;
 
      };
@@ -90,11 +116,24 @@ $(document).ready(function () {
                     lingua :flag(film.original_language),
                     voto: stars(film.vote_average)  //per la votazione uso la funzione stars .
                };
-               var votoEffettivo = parseInt(informazioni.voto);
-               console.log(votoEffettivo);
-               console.log(votoEffettivo.length);
-               oggettoVoto.push(votoEffettivo);
+
                var html = templateFilm(informazioni);
+               $('.mc-films-cont').append(html); //scrivo
+          };
+     }
+
+     function ricerca2(series) {
+          for (var i = 0; i < series.length; i++) { // con il ciclo for entro nell'array contenente tutti i film ...
+               var serie = series[i] // mi creo ad ogni giro del ciclo una variabile con un film corrispondente alla ricerca
+
+               var informazioniSeries = { // creo un oggetto contenente i parametri che andrò a cambiare con handlebars..
+                    titolo: serie.name,
+                    titoloOriginale: serie.original_name,
+                    lingua :flag(serie.original_language),
+                    voto: stars(serie.vote_average)  //per la votazione uso la funzione stars .
+               };
+
+               var html = templateFilm(informazioniSeries);
                $('.mc-films-cont').append(html); //scrivo
           };
      }
