@@ -47,24 +47,41 @@
      padding-left: 35px;
 }
 
+.avatar {
+     padding-right: 35px;
+}
+
+.width-70{
+     width: 70%;
+}
+
+.width-30{
+     width: 30%;
+}
+
 
 .mc-barra-di-ricerca{
      height: 100%;
      width: 30%;
      display: flex;
-     justify-content: center;
+     justify-content: flex-end;
      align-items: center;
      position: relative;
 }
 
-.mc-barra-di-ricerca .fa-search {
+.mc-barra-di-ricerca i{
      cursor: pointer;
      color: white;
      padding-right: 15px;
      font-size: 13px;
+     padding-left: 15px;
+}
+
+.mc-barra-di-ricerca .fa-search {
      left: 10px;
      top: 10px;
      transition:all 1s linear;
+     padding-left: 0px;
 }
 
 .mc-block{
@@ -78,7 +95,6 @@
 .mc-logodiv img{
      width: 100%;
      width: 6rem;
-
 }
 
 .mc-sfondo{

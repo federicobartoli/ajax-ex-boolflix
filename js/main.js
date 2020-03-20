@@ -9,19 +9,27 @@ $(document).ready(function () {
           if($(this).hasClass('mc-absolute')){
                $(this).removeClass('mc-absolute');
                $('.cerca-un-film').hide();
+               $('.mc-barra-di-ricerca').removeClass('width-50');
+               $('.mc-logodiv').removeClass('width-50');
           }else {
                $(this).addClass('mc-absolute');
                $('.cerca-un-film').show();
+               $('.mc-barra-di-ricerca').addClass('width-30');
+               $('.mc-logodiv').addClass('width-70');
+
           }
 
 
      })
+
+
      $('.cerca-un-film').keyup(cerca)
 
      $('.vai-al-film').click(cerca); //con un click nel bottone accanto alla barra di ricerca faccio partire la funzione cerca
      $('.cerca-un-film').keypress(function (event) { //avvio con il pulsante enter la funzione cerca.
           if(event.keyCode == 13) {
                cerca();
+
           }
      })
 
