@@ -78,6 +78,11 @@
      flex-flow: column;
 }
 
+.mc-info img {
+     width: 30px;
+     padding-left: 10px;
+}
+
 .mc-info p {
      color: white;
 }

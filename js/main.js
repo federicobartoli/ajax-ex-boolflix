@@ -69,6 +69,15 @@ $(document).ready(function () {
           return votoStelle.join(''); // mi returno l'array più ho aggiunto il join per togliere le virgole che separavano gli array(in questo caso le stelline)
      };
 
+     function flag(linguaOriginale) {
+          var bandiera = linguaOriginale;
+          if(bandiera == 'en') {
+               bandiera = 'us';
+          }
+          return bandiera;
+
+     };
+
 
      function ricerca(films) {
           for (var i = 0; i < films.length; i++) { // con il ciclo for entro nell'array contenente tutti i film ...
@@ -78,7 +87,7 @@ $(document).ready(function () {
                var informazioni = { // creo un oggetto contenente i parametri che andrò a cambiare con handlebars..
                     titolo: film.title,
                     titoloOriginale: film.original_title,
-                    lingua :film.original_language,
+                    lingua :flag(film.original_language),
                     voto: stars(film.vote_average)  //per la votazione uso la funzione stars .
                };
                var votoEffettivo = parseInt(informazioni.voto);
