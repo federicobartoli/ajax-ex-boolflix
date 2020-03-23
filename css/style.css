@@ -190,6 +190,15 @@
      text-align: center;
 }
 
+.mc-info p:last-child{
+     color: white;
+     white-space:normal;
+     width: 100%;
+     overflow:visible;
+     text-overflow: ellipsis;
+     text-align: center;
+}
+
 .star-active{
      color: yellow;
 }
