@@ -146,19 +146,34 @@
 }
 
 .mc-films-item {
-     background-color: grey;
-     min-width: 300px;
-     height: 400px;
+     background-color: white;
+     min-width: 250px;
+     height: 375px;
      display: flex;
      justify-content: center;
      align-items: center;
      margin-left: 50px;
      border-radius: 5px;
+     position: relative;
 }
 
 .mc-info {
+     z-index: 99;
+    position: absolute;
+    top: 0;
+    display: none;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: black;
+    width: 100%;
+
+}
+
+.mc-films-item:hover .mc-info{
      display: flex;
-     flex-flow: column;
+
 }
 
 .mc-info img {
@@ -168,6 +183,11 @@
 
 .mc-info p {
      color: white;
+     white-space: nowrap;
+     width: 100%;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     text-align: center;
 }
 
 .star-active{
@@ -213,23 +233,24 @@ textarea:focus, input:focus{
 
 
 
-.mc-img-film{
+.mc-img-films{
+     display: inline-flex;
+     width: 100%;
      position: relative;
+     transition: all 0.5s;
 }
 
 .mc-img-films img {
-     width: 100px;
-
+     width: 250px;
+     height: 375px;
 }
 
-.mc-img-films{
-     transition: all 0.5s;
-     padding-right: 50px;
-}
 
-.mc-img-film:hover{
+
+/* .mc-img-films:hover{
      transform: scale(1.05);
-}
+
+} */
 
 
 .mc-title h1{

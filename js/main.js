@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-
+     var imgBaseurl = 'https://image.tmdb.org/t/p/';
+     var imgSize = 'w500/';
      var oggettoVoto = [];
      var apiBaseUrl = 'https://api.themoviedb.org/3'; //URL per api
      var source = $('#template-film-id').html();
@@ -23,15 +24,22 @@ $(document).ready(function () {
      })
 
 
-     $('.cerca-un-film').keyup(cerca)
 
-     $('.vai-al-film').click(cerca); //con un click nel bottone accanto alla barra di ricerca faccio partire la funzione cerca
+
+
+     $('.cerca-un-film').keyup(function () { //funzione KEYUP in prova
+          cerca('movie');
+          cerca('tv');
+     });
+
+     // $('.vai-al-film').click(cerca); //con un click nel bottone accanto alla barra di ricerca faccio partire la funzione cerca
      $('.cerca-un-film').keypress(function (event) { //avvio con il pulsante enter la funzione cerca.
           if(event.keyCode == 13) {
-               cerca();
-
+               cerca('movie');
+               cerca('tv');
           }
-     })
+
+     });
 
 
 
@@ -41,7 +49,7 @@ $(document).ready(function () {
      return  Math.ceil(numero);
      };
 
-     function cerca() {
+     function cerca(variabile) {
           $('.img-wallpaper').hide();
 
           $('.mc-films-cont').empty(); // vado a svuotare il div in caso ci fossero dei risultati di ricerca vecchi
@@ -51,7 +59,7 @@ $(document).ready(function () {
           }
           console.log(ricercaDelFilm); // debug
           $.ajax({ // faccio una chiamata ajax
-               url: apiBaseUrl + '/search/movie',
+               url: apiBaseUrl + '/search/' + variabile,
                data: {
                     api_key: '73ae8877a28c5944fa34ff1c5a2be181',
                     query: ricercaDelFilm, //qui vado ad inserire il dato inserito dall'utente
@@ -61,37 +69,18 @@ $(document).ready(function () {
                success: function (data) { // se la chiamata ajax va a buon fine...
                     console.log(data);
                     var films = data.results; // creo una variabile con un array che contiene tutti i film trovati..
-                    if(data.total_results < 1 ){
-                    $('.mc-films-cont').text('Non ho trovato nessun film,spiacente.');
-                    console.log('non ho trovato niente');
-                    }else{
-                         ricerca(films);
-                    }
+                         if(variabile == 'movie'){
+                              ricerca(films);
 
+                         }
+                         if (variabile == 'tv'){
+                              ricerca2(films);
+                         }
                }
 
           })
           console.log(ricercaDelFilm); // debug
-          $.ajax({ // faccio una chiamata ajax
-               url: apiBaseUrl + '/search/tv',
-               data: {
-                    api_key: '73ae8877a28c5944fa34ff1c5a2be181',
-                    query: ricercaDelFilm, //qui vado ad inserire il dato inserito dall'utente
-                    language: 'it-IT'
-               },
-               method: 'GET',
-               success: function (data) { // se la chiamata ajax va a buon fine...
-                    var series = data.results; // creo una variabile con un array che contiene tutti i film trovati..
-                    if(data.total_results < 1 ){
-                    $('.mc-films-cont').text('Non ho trovato nessun film,spiacente.');
 
-                    }else{
-                         ricerca2(series);
-                    }
-
-               }
-
-          })
 
      };
 
@@ -122,6 +111,27 @@ $(document).ready(function () {
           if(bandiera == 'ja') {
                bandiera = 'jp';
           }
+          if(bandiera == 'zh') {
+               bandiera = 'cn';
+          }
+          if(bandiera == 'ko') {
+               bandiera = 'kp';
+          }
+          if(bandiera == 'ur') {
+               bandiera = 'tr';
+          }
+          if(bandiera == 'he') {
+               bandiera = 'il';
+          }
+          if(bandiera == 'da') {
+               bandiera = 'dk';
+          }
+          if(bandiera == 'hi') {
+               bandiera = 'in';
+          }
+          if(bandiera == 'xx') {
+               bandiera = 'us';
+          }
           return bandiera;
 
      };
@@ -136,13 +146,21 @@ $(document).ready(function () {
                     titolo: film.title,
                     titoloOriginale: film.original_title,
                     lingua :flag(film.original_language),
-                    copertina: film.poster_path,
+                    copertina: poster(film.poster_path),
                     voto: stars(film.vote_average)  //per la votazione uso la funzione stars .
                };
 
                var html = templateFilm(informazioni);
                $('.mc-films-cont').append(html); //scrivo
           };
+     }
+
+     function poster(path) { //costruzione del poster
+          if(path != null) {
+               return imgBaseurl + imgSize + path;
+          } else {
+               return 'https://upload.wikimedia.org/wikipedia/commons/6/64/Poster_not_available.jpg';
+          }
      }
 
      function ricerca2(series) {
@@ -152,8 +170,8 @@ $(document).ready(function () {
                var informazioniSeries = { // creo un oggetto contenente i parametri che andrò a cambiare con handlebars..
                     titolo: serie.name,
                     titoloOriginale: serie.original_name,
-                    lingua :flag(serie.original_language),
-                    copertina: serie.poster_path,
+                    lingua : flag(serie.original_language),
+                    copertina: poster(serie.poster_path),
                     voto: stars(serie.vote_average)  //per la votazione uso la funzione stars .
                };
 
