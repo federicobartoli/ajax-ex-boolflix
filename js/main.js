@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+
+
+     // (function(e){"use strict";if(typeof define==="function"&&define.amd){define(["jquery"],e)}else{e(jQuery)}})(function(e){"use strict";function i(i,s){function g(){o.text=o.$cont.text();o.opts.ellipLineClass=o.opts.ellipClass+"-line";o.$el=e('<span class="'+o.opts.ellipClass+'" />');o.$el.text(o.text);o.$cont.empty().append(o.$el);y()}function y(){if(typeof o.opts.lines==="number"&&o.opts.lines<2){o.$el.addClass(o.opts.ellipLineClass);return}d=o.$cont.height();if(o.opts.lines==="auto"&&o.$el.prop("scrollHeight")<=d){return}if(!f){return}v=e.trim(w(o.text)).split(/\s+/);o.$el.html(n+v.join("</span> "+n)+"</span>");o.$el.find("span").each(f);if(l!=null){b(l)}}function b(e){v[e]='<span class="'+o.opts.ellipLineClass+'">'+v[e];v.push("</span>");o.$el.html(v.join(" "))}function w(e){return String(e).replace(/[&<>"'\/]/g,function(e){return m[e]})}var o=this,u=0,a=[],f,l,c,h,p,d,v,m;m={"&":"&","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"};o.$cont=e(i);o.opts=e.extend({},r,s);if(o.opts.lines==="auto"){var E=function(t,n){var r=e(n),i=r.position().top;p=p||r.height();if(i===h){a[u].push(r)}else{h=i;u+=1;a[u]=[r]}if(i+p>d){l=t-a[u-1].length;return false}};f=E}if(typeof o.opts.lines==="number"&&o.opts.lines>1){var S=function(t,n){var r=e(n),i=r.position().top;if(i!==h){h=i;u+=1}if(u===o.opts.lines){l=t;return false}};f=S}if(o.opts.responsive){var x=function(){a=[];u=0;h=null;l=null;o.$el.html(w(o.text));clearTimeout(c);c=setTimeout(y,100)};e(window).on("resize."+t,x)}g()}var t="ellipsis",n='<span style="white-space: nowrap;">',r={lines:"auto",ellipClass:"ellip",responsive:false};e.fn[t]=function(n){return this.each(function(){try{e(this).data(t,new i(this,n))}catch(r){if(window.console){console.error(t+": "+r)}}})}})
+     //
+
+
+     // $('.mc-films-cont').on('click',ellipsLines);
+
+
      var imgBaseurl = 'https://image.tmdb.org/t/p/';
      var imgSize = 'w500/';
      var oggettoVoto = [];
@@ -27,10 +36,10 @@ $(document).ready(function () {
 
 
 
-     $('.cerca-un-film').keyup(function () { //funzione KEYUP in prova
-          cerca('movie');
-          cerca('tv');
-     });
+     // $('.cerca-un-film').keyup(function () { //funzione KEYUP in prova
+     //      cerca('movie');
+     //      cerca('tv');
+     // });
 
      // $('.vai-al-film').click(cerca); //con un click nel bottone accanto alla barra di ricerca faccio partire la funzione cerca
      $('.cerca-un-film').keypress(function (event) { //avvio con il pulsante enter la funzione cerca.
@@ -38,6 +47,7 @@ $(document).ready(function () {
                cerca('movie');
                cerca('tv');
           }
+
 
      });
 
@@ -147,12 +157,23 @@ $(document).ready(function () {
                     titoloOriginale: film.original_title,
                     lingua :flag(film.original_language),
                     copertina: poster(film.poster_path),
-                    overview: film.overview,
+                    overview: film.overview.substring(0,200) + '...',  //Stringa max 200 caratteri
+                    subOverview: film.overview,//Stringa piena
                     voto: stars(film.vote_average)  //per la votazione uso la funzione stars .
                };
 
                var html = templateFilm(informazioni);
                $('.mc-films-cont').append(html); //scrivo
+               $('.trama').click(function () { // funzione per vedere la trama intera
+                    $(this).hide();
+                    $(this).siblings('.informazioni-mc-info').hide();
+                    $(this).siblings('.trama-intera').show();
+               })
+               $('.trama-intera').click(function () {
+               $(this).hide();
+               $(this).siblings('.informazioni-mc-info').show();
+
+               })
           };
      }
 
@@ -164,6 +185,14 @@ $(document).ready(function () {
           }
      }
 
+     function ellipsLines() {
+          $('.two-lines').ellipsis({
+          lines: 3,             // force ellipsis after a certain number of lines. Default is 'auto'
+          ellipClass: 'ellip',  // class used for ellipsis wrapper and to namespace ellip line
+          responsive: true      // set to true if you want ellipsis to update on window resize. Default is false
+        });
+     }
+
      function ricerca2(series) {
           for (var i = 0; i < series.length; i++) { // con il ciclo for entro nell'array contenente tutti le serie ...
                var serie = series[i] // mi creo ad ogni giro del ciclo una variabile con una serie corrispondente alla ricerca
@@ -173,12 +202,25 @@ $(document).ready(function () {
                     titoloOriginale: serie.original_name,
                     lingua : flag(serie.original_language),
                     copertina: poster(serie.poster_path),
-                    overview: serie.overview,
+                    overview: serie.overview.substring(0,200) + '...',  //Stringa max 200 caratteri
+                    subOverview: serie.overview,//Stringa piena
                     voto: stars(serie.vote_average)  //per la votazione uso la funzione stars .
                };
 
                var html = templateFilm(informazioniSeries);
                $('.mc-films-cont').append(html); //scrivo
+               $('.trama').click(function () { // funzione per vedere la trama intera
+                    $(this).hide();
+                    $(this).siblings('.informazioni-mc-info').hide();
+                    $(this).siblings('.trama-intera').show();
+
+               })
+               $('.trama-intera').click(function () {
+               $(this).hide();
+               $(this).siblings('.informazioni-mc-info').show();
+
+               })
+
           };
      }
 });
