@@ -2,19 +2,14 @@ $(document).ready(function () {
 
 
 
-     // (function(e){"use strict";if(typeof define==="function"&&define.amd){define(["jquery"],e)}else{e(jQuery)}})(function(e){"use strict";function i(i,s){function g(){o.text=o.$cont.text();o.opts.ellipLineClass=o.opts.ellipClass+"-line";o.$el=e('<span class="'+o.opts.ellipClass+'" />');o.$el.text(o.text);o.$cont.empty().append(o.$el);y()}function y(){if(typeof o.opts.lines==="number"&&o.opts.lines<2){o.$el.addClass(o.opts.ellipLineClass);return}d=o.$cont.height();if(o.opts.lines==="auto"&&o.$el.prop("scrollHeight")<=d){return}if(!f){return}v=e.trim(w(o.text)).split(/\s+/);o.$el.html(n+v.join("</span> "+n)+"</span>");o.$el.find("span").each(f);if(l!=null){b(l)}}function b(e){v[e]='<span class="'+o.opts.ellipLineClass+'">'+v[e];v.push("</span>");o.$el.html(v.join(" "))}function w(e){return String(e).replace(/[&<>"'\/]/g,function(e){return m[e]})}var o=this,u=0,a=[],f,l,c,h,p,d,v,m;m={"&":"&","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"};o.$cont=e(i);o.opts=e.extend({},r,s);if(o.opts.lines==="auto"){var E=function(t,n){var r=e(n),i=r.position().top;p=p||r.height();if(i===h){a[u].push(r)}else{h=i;u+=1;a[u]=[r]}if(i+p>d){l=t-a[u-1].length;return false}};f=E}if(typeof o.opts.lines==="number"&&o.opts.lines>1){var S=function(t,n){var r=e(n),i=r.position().top;if(i!==h){h=i;u+=1}if(u===o.opts.lines){l=t;return false}};f=S}if(o.opts.responsive){var x=function(){a=[];u=0;h=null;l=null;o.$el.html(w(o.text));clearTimeout(c);c=setTimeout(y,100)};e(window).on("resize."+t,x)}g()}var t="ellipsis",n='<span style="white-space: nowrap;">',r={lines:"auto",ellipClass:"ellip",responsive:false};e.fn[t]=function(n){return this.each(function(){try{e(this).data(t,new i(this,n))}catch(r){if(window.console){console.error(t+": "+r)}}})}})
-     //
-
-
-     // $('.mc-films-cont').on('click',ellipsLines);
-
-
      var imgBaseurl = 'https://image.tmdb.org/t/p/';
      var imgSize = 'w500/';
      var oggettoVoto = [];
      var apiBaseUrl = 'https://api.themoviedb.org/3'; //URL per api
      var source = $('#template-film-id').html();
      var templateFilm = Handlebars.compile(source);
+     var source2 = $('#template-film-id-2').html();
+     var templateFilm2 = Handlebars.compile(source2);
      $('.fa-search').click(function () {
           if($(this).hasClass('mc-absolute')){
                $(this).removeClass('mc-absolute');
@@ -79,6 +74,7 @@ $(document).ready(function () {
                success: function (data) { // se la chiamata ajax va a buon fine...
                     console.log(data);
                     var films = data.results; // creo una variabile con un array che contiene tutti i film trovati..
+                    console.log(films);
                          if(variabile == 'movie'){
                               ricerca(films);
 
@@ -152,6 +148,7 @@ $(document).ready(function () {
                var film = films[i] // mi creo ad ogni giro del ciclo una variabile con un film corrispondente alla ricerca
                console.log(film.title); // debug
                console.log(film.overview); // debug
+               console.log(film.id);
                var informazioni = { // creo un oggetto contenente i parametri che andrò a cambiare con handlebars..
                     titolo: film.title,
                     titoloOriginale: film.original_title,
@@ -159,11 +156,16 @@ $(document).ready(function () {
                     copertina: poster(film.poster_path),
                     overview: film.overview.substring(0,200) + '...',  //Stringa max 200 caratteri
                     subOverview: film.overview,//Stringa piena
-                    voto: stars(film.vote_average)  //per la votazione uso la funzione stars .
+                    voto: stars(film.vote_average),  //per la votazione uso la funzione stars .
+                    dataId: film.id
                };
 
                var html = templateFilm(informazioni);
                $('.mc-films-cont').append(html); //scrivo
+
+
+
+
                $('.trama').click(function () { // funzione per vedere la trama intera
                     $(this).hide();
                     $(this).siblings('.informazioni-mc-info').hide();
@@ -174,7 +176,54 @@ $(document).ready(function () {
                $(this).siblings('.informazioni-mc-info').show();
 
                })
+
+
           };
+          $('.aggiungi-info').click(function () {
+               var informazioniPersonaggieAttori = '';
+               var these = $(this)
+               var theseData = $(this).parentsUntil('.mc-films-item').data('identificativo');
+               console.log(these);
+               $.ajax({ // faccio una chiamata ajax
+                    url: apiBaseUrl + '/movie/' + theseData + '/credits',
+                    data: {
+                         api_key: '73ae8877a28c5944fa34ff1c5a2be181',
+                    },
+                    method: 'GET',
+                    success: function (credits) { // se la chiamata ajax va a buon fine...
+                         console.log(credits);
+                         var creditCast = credits.cast;
+                         var nomiAttori = [];
+                         for (var i = 0; i < 5; i++) {
+                              nomiAttori.push(creditCast[i].name);
+                         }
+                         console.log(nomiAttori);
+
+                         var nomiCharacter = [];
+                         for (var i = 0; i < 5; i++) {
+                              nomiCharacter.push(creditCast[i].character);
+                         }
+                         console.log(nomiCharacter);
+                         var informazioniPersonaggieAttori = { // creo un oggetto contenente i parametri che andrò a cambiare con handlebars..
+                              attori: nomiAttori.toString(),
+                         };
+                         console.log(informazioniPersonaggieAttori);
+                         var html2 = templateFilm2(informazioniPersonaggieAttori);
+                         $(these).parent('.mc-info').append(html2); //scrivo
+
+
+
+
+
+                         // var creditNameCast = creditCast[0].name
+                         // var creditNameCharCast = creditCast.character
+                         // console.log(creditNameCast);
+                         // console.log(creditNameCharCast);
+                         // console.log(creditCast);
+
+                    }
+               })
+          })
      }
 
      function poster(path) { //costruzione del poster

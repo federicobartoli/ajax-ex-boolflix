@@ -71,17 +71,25 @@
                          <div class="mc-img-films">
                               <img src="{{copertina}}" alt="locandina {{titoloOriginale}}">
                          </div>
-                         <div class="mc-info">
+                         <div class="mc-info" data-identificativo="{{dataId}}">
                                    <p class="informazioni-mc-info">Titolo: {{titolo}}</p>
                                    <p class="informazioni-mc-info">Titolo originale: {{titoloOriginale}}</p>
                                    <p class="informazioni-mc-info">Lingua :<img src="https://www.countryflags.io/{{lingua}}/shiny/64.png"></p>
                                    <p class="informazioni-mc-info">Voto : {{{voto}}} </p>
                                    <p class="informazioni-mc-info trama">Trama : {{overview}} </p>
+
+                                   <p class="informazioni-mc-info aggiungi-info">Più informazioni...</p>
+
+
                                    <p class="trama-intera">Trama : {{subOverview}}</p>
                          </div>
 
 
                     </div>
+          </script>
+
+          <script id="template-film-id-2" type="text/x-handlebars-template">
+               <p class="informazioni-mc-info attori">Attori : {{attori}} </p>
           </script>
 
     <script src="js/main.js" charset="utf-8"></script>
