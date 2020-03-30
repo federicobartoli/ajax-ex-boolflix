@@ -180,6 +180,7 @@ $(document).ready(function () {
 
           };
           $('.aggiungi-info').click(function () {
+               $('.attori').text('');
                var informazioniPersonaggieAttori = '';
                var these = $(this)
                var theseData = $(this).parentsUntil('.mc-films-item').data('identificativo');
